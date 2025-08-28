@@ -51,6 +51,13 @@ class DataleonSDK {
   }
 
   /**
+   * Closes the Dataleon verification modal from outside.
+   */
+  static close() {
+    DataleonSDK._hideModal();
+  }
+
+  /**
    * Internal method to show the modal.
    * @private
    * @param {string} sessionUrl
@@ -87,6 +94,5 @@ class DataleonSDK {
     DataleonSDK._modalRenderer = fn;
   }
 }
-
 
 export default DataleonSDK;

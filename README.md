@@ -2,6 +2,62 @@
 
 React Native SDK to integrate Dataleon verification via WebView.
 
+## Permissions Setup (Camera & Microphone)
+
+### 1️⃣ React Native – Camera and Microphone Permissions
+
+#### 🔹 Android
+
+In `android/app/src/main/AndroidManifest.xml`, add the following permissions **above** the `<application>` tag:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+
+⚠️ **Important:** For Android 6+ (API 23+), you must request runtime permissions from React Native:
+
+```js
+import { PermissionsAndroid, Platform } from 'react-native';
+
+async function requestCameraPermissions() {
+  if (Platform.OS === 'android') {
+    const granted = await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+    ]);
+    return (
+      granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
+      granted['android.permission.RECORD_AUDIO'] === PermissionsAndroid.RESULTS.GRANTED
+    );
+  }
+  return true;
+}
+```
+
+#### 🔹 iOS
+
+In `ios/YourApp/Info.plist`, add:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>The camera is required for identity verification</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>The microphone may be used for video verification</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Access to the gallery for some documents (optional)</string>
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+```
+
+iOS automatically handles permission prompts when the WebView or SDK tries to use the camera or microphone.
+
+
 ## Installation
 
 ```bash
@@ -89,5 +145,3 @@ React component that displays the verification WebView.
 Props:
 - `sessionUrl` (string): The URL to load.
 - `onResult` (function): Callback called with the result.
-
-##

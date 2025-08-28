@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 import DataleonSDK from './DataleonSDK';
+import { PermissionsAndroid } from 'react-native';
+
 
 /**
  * DataleonWebView
@@ -35,6 +37,15 @@ const DataleonWebView = ({ sessionUrl, onResult }) => {
     }
   };
 
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+      ]);
+    }
+  }, []);
+
   const handleMessage = (event) => {
     const msg = event.nativeEvent.data;
     switch (msg) {
@@ -66,7 +77,17 @@ const DataleonWebView = ({ sessionUrl, onResult }) => {
       <WebView
         source={{ uri: sessionUrl }}
         onLoadEnd={() => setLoading(false)}
+        mediaCapturePermissionGrantType="grant"
+        userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+        startInLoadingState
         javaScriptEnabled
+        domStorageEnabled
+        cacheEnabled
+        thirdPartyCookiesEnabled
+        allowsProtectedMedia
+        allowUniversalAccessFromFileURLs
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={false}
         onNavigationStateChange={handleNavChange}
         onMessage={handleMessage}
       />
