@@ -57,7 +57,7 @@ const DataleonWebView = ({ sessionUrl, onResult }) => {
         onResult({ status: DataleonSDK.statusDone });
         break;
       case 'FAILED':
-        onResult({ status: DataleonSDK.statusFailed, error: 'Verification failed' });
+        onResult({ status: DataleonSDK.statusFailed });
         break;
       case 'ABORTED':
         onResult({ status: DataleonSDK.statusCanceled });

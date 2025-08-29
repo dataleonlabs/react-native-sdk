@@ -91,19 +91,23 @@ Call the `DataleonSDK.launch` method where you want to start the verification pr
 ```jsx
 import { DataleonSDK } from '@dataleon/react-native-sdk';
 
-const startVerification = async () => {
-  const result = await DataleonSDK.launch({ sessionUrl: 'https://your-session-url' });
-  if (result.status === DataleonSDK.statusDone) {
-    // Success
-  } else if (result.status === DataleonSDK.statusCanceled) {
-    // Canceled by user
-  } else if (result.status === DataleonSDK.statusError) {
-    // Error occurred
-  } else if (result.status === DataleonSDK.statusFailed) {
-    // Verification failed
-  } else if (result.status === DataleonSDK.statusStarted) {
-    // Verification started
-  }
+const startVerification = () => {
+  DataleonSDK.launch({
+    sessionUrl: 'https://your-session-url',
+    onResult: ({ status }) => {
+      if (status === DataleonSDK.statusDone) {
+        // Success
+      } else if (status === DataleonSDK.statusCanceled) {
+        // Canceled by user
+      } else if (status === DataleonSDK.statusError) {
+        // Error occurred
+      } else if (status === DataleonSDK.statusFailed) {
+        // Verification failed
+      } else if (status === DataleonSDK.statusStarted) {
+        // Verification started
+      }
+    }
+  });
 };
 ```
 
@@ -118,15 +122,36 @@ const handleResult = (result) => {
   // Handle result object
 };
 
-<DataleonWebView sessionUrl="https://your-session-url" onResult={handleResult} />;
+<DataleonWebView sessionUrl="https://id.dataleon.ai/w/76bf997a-219e-xxxxx" onResult={handleResult} />;
 ```
 
 ## API
 
 ### DataleonSDK
 
-- `DataleonSDK.launch({ sessionUrl })`  
-  Launches the verification modal. Returns a Promise with the result object.
+- `DataleonSDK.launch({ sessionUrl, onResult })`  
+  Launches the verification modal.  
+  The `onResult` callback will be called with an object containing at least a `status` property
+
+  Example:
+  ```js
+  DataleonSDK.launch({
+    sessionUrl: 'https://id.dataleon.ai/w/76bf997a-219e-xxxxx',
+    onResult: ({ status }) => {
+      if (status === DataleonSDK.statusDone) {
+        // Success
+      } else if (status === DataleonSDK.statusCanceled) {
+        // Canceled by user
+      } else if (status === DataleonSDK.statusError) {
+        // Error occurred
+      } else if (status === DataleonSDK.statusFailed) {
+        // Verification failed
+      } else if (status === DataleonSDK.statusStarted) {
+        // Verification started
+      }
+    }
+  });
+  ```
 
 - Status constants:
   - `DataleonSDK.statusDone`

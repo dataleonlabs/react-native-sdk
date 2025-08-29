@@ -1,5 +1,5 @@
 {
-  "name": "dataleon-react-native-sdk",
+  "name": "@dataleon/react-native-sdk",
   "version": "1.0.0",
   "description": "React Native SDK for Dataleon integration via WebView",
   "main": "index.js",
