@@ -1,9 +1,14 @@
 {
   "name": "@dataleon/react-native-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Native SDK for Dataleon integration via WebView",
   "main": "index.js",
-  "keywords": ["react-native", "dataleon", "webview", "sdk"],
+  "keywords": [
+    "react-native",
+    "dataleon",
+    "webview",
+    "sdk"
+  ],
   "author": "dataleon",
   "license": "MIT",
   "peerDependencies": {
