@@ -122,7 +122,7 @@ const handleResult = (result) => {
   // Handle result object
 };
 
-<DataleonWebView sessionUrl="https://id.dataleon.ai/w/76bf997a-219e-xxxxx" onResult={handleResult} />;
+<DataleonWebView sessionUrl="https://your-session-url" onResult={handleResult} />;
 ```
 
 ## API
@@ -136,7 +136,7 @@ const handleResult = (result) => {
   Example:
   ```js
   DataleonSDK.launch({
-    sessionUrl: 'https://id.dataleon.ai/w/76bf997a-219e-xxxxx',
+    sessionUrl: 'https://your-session-url',
     onResult: ({ status }) => {
       if (status === DataleonSDK.statusDone) {
         // Success
