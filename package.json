@@ -1,6 +1,6 @@
 {
   "name": "@dataleon/react-native-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Native SDK for Dataleon integration via WebView",
   "main": "index.js",
   "keywords": [
