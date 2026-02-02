@@ -1,11 +1,11 @@
-import {
-    DataleonWebView,
-    DataleonModalHost,
-    DataleonSDK
-} from './src/index';
+export * from './src/index';
+
+import DataleonSDK from './src/DataleonSDK';
+import DataleonModalHost from './src/DataleonModalHost';
+import DataleonWebView from './src/DataleonWebView';
 
 export default {
-  DataleonWebView,
+  DataleonSDK,
   DataleonModalHost,
-  DataleonSDK
+  DataleonWebView,
 };
